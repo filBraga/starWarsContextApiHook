@@ -11,11 +11,15 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [planetNameFilter, setPlanetName] = useState('');
+
   const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
   const contextValue = {
     planets,
     setPlanets,
+    planetNameFilter,
+    setPlanetName,
   };
 
   useEffect(() => {

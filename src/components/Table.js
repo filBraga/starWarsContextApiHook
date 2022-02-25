@@ -2,13 +2,24 @@ import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
 const Table = () => {
-  const { planets, setPlanets } = useContext(AppContext);
+  const { planets, planetNameFilter /* , setPlanets */ } = useContext(AppContext);
   // const { results } = planets;
+
+  // Using reduce to filter
+  // https://stackoverflow.com/questions/34398279/map-and-filter-an-array-at-the-same-time
+  const planetsWithNameFilter = planets.reduce((filtered, planet) => {
+    if (planet.name.includes(planetNameFilter)) {
+      filtered.push(planet);
+    }
+    return filtered;
+  }, []);
+  // console.log(planetsWithNameFilter);
 
   return (
 
     <div>
       <table>
+
         <tbody>
           <tr>
             <th>name</th>
@@ -28,7 +39,7 @@ const Table = () => {
         </tbody>
 
         <tbody>
-          {planets.map((item) => (
+          {planetsWithNameFilter.map((item) => (
             <tr key={ item.name }>
               <td>{item.name}</td>
               <td>{item.rotation_period}</td>
@@ -46,20 +57,8 @@ const Table = () => {
             </tr>
           ))}
         </tbody>
+
       </table>
-
-      {/* <ul>
-        {planets.map((item) => (<li key={ item.name }>{item.name}</li>))}
-      </ul> */}
-
-      {/* {console.log('oi', planets)} */}
-
-      <button
-        type="button"
-        onClick={ () => setPlanets([]) }
-      >
-        Click
-      </button>
     </div>
   );
 };
