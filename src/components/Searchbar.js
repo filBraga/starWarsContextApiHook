@@ -1,16 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AppContext from '../context/AppContext';
 
 const Searchbar = () => {
-  const { planetName, setPlanetName } = useContext(AppContext);
+  const {
+    planetName,
+    setPlanetName,
+    setPlanetValue,
+  } = useContext(AppContext);
+
+  const [columnValue, setColumnValue] = useState(0);
+  const [comparisonValue, setComparisonValue] = useState(0);
+  const [valueValue, setValueValue] = useState(0);
 
   function handleNameChange(event) {
     setPlanetName({ filterByName: { name: event.target.value } });
   }
 
-  const addValueFilter = () => {
-    console.log('oi');
-  };
+  function handleFilterChange() {
+    console.log(columnValue, comparisonValue, valueValue);
+    setPlanetValue((prevState) => ({
+      // ...prevState,
+      filterByNumericValues: [
+        ...prevState.filterByNumericValues,
+        {
+          column: columnValue,
+          comparison: comparisonValue,
+          value: Number(valueValue),
+        },
+      ],
+    }));
+    setColumnValue('');
+    setComparisonValue('');
+    setValueValue(0);
+  }
 
   return (
     <div>
@@ -30,7 +52,13 @@ const Searchbar = () => {
 
       <label htmlFor="colum">
         Colum:
-        <select name="colum" id="colum" data-testid="column-filter">
+        <select
+          name="colum"
+          id="colum"
+          data-testid="column-filter"
+          onChange={ (e) => setColumnValue(e.target.value) }
+          value={ columnValue }
+        >
           <option value="population">population</option>
           <option value="orbital_period">orbital_period</option>
           <option value="diameter">diameter</option>
@@ -41,7 +69,13 @@ const Searchbar = () => {
 
       <label htmlFor="operator">
         Operator:
-        <select name="operator" id="operator" data-testid="comparison-filter">
+        <select
+          name="operator"
+          id="operator"
+          data-testid="comparison-filter"
+          onChange={ (e) => setComparisonValue(e.target.value) }
+          value={ comparisonValue }
+        >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
           <option value="igual a">igual a</option>
@@ -55,13 +89,13 @@ const Searchbar = () => {
           id="filterValue"
           name="filterValue"
           data-testid="value-filter"
-          // onChange={ handleChange }
-          // value={ planetName }
+          onChange={ (e) => setValueValue(e.target.value) }
+          value={ valueValue }
         />
       </label>
 
       <button
-        onClick={ addValueFilter }
+        onClick={ handleFilterChange }
         type="button"
         data-testid="button-filter"
       >

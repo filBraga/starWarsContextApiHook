@@ -169,7 +169,7 @@ describe('2 - Filtre a tabela através de um texto, inserido num *campo de texto
   });
 });
 
-xdescribe('3 - Crie um filtro para valores numéricos', () => {
+describe('3 - Crie um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -296,7 +296,7 @@ xdescribe('3 - Crie um filtro para valores numéricos', () => {
   });
 });
 
-xdescribe('4 - Implemente múltiplos filtros numéricos', () => {
+describe('4 - Implemente múltiplos filtros numéricos', () => {
   it('Adicione dois filtros e verifique se a tabela foi atualizada com as informações filtradas', async () => {
     await act(async () => {
       render(<App />);

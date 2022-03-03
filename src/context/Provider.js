@@ -25,16 +25,16 @@ function Provider({ children }) {
   // FILTRO DO VALOR
   const [planetValueFilter, setPlanetValue] = useState({
     filterByNumericValues: [
-      {
-        column: 'population',
-        comparison: 'maior que',
-        value: '1001',
-      },
-      {
-        column: 'diameter',
-        comparison: 'maior que',
-        value: '1001',
-      },
+    //   {
+    //     column: 'population',
+    //     comparison: 'menor que',
+    //     value: 1001,
+    //   },
+    //   {
+    //     column: 'diameter',
+    //     comparison: 'menor que',
+    //     value: 10201,
+    //   },
     ],
   });
 
