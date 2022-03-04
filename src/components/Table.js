@@ -7,53 +7,16 @@ const Table = () => {
     planetNameFilter,
     planetValueFilter,
   } = useContext(AppContext);
-  // const { results } = planets;
 
-  // Using reduce to filter name
+  // Using reduce to filter Name
   const planetsWithFilter = planets.reduce((filtered, planet) => {
-    ' ';
-
     if (planet.name.includes(planetNameFilter.filterByName.name)) {
       filtered.push(planet);
     }
-    // console.log(filtered);
     return filtered;
   }, []);
 
-  // PRIMEIRA TENTATIVA USANDO SPLICE - REMOVENDO
-  // https://stackoverflow.com/questions/34398279/map-and-filter-an-array-at-the-same-time
-  //   if (planet.name.includes(planetNameFilter.filterByName.name)) {
-  //     planetValueFilter.filterByNumericValues.forEach((item) => {
-  //       const columnFilter = item.column;
-  //       const valueFilter = item.value;
-  //       console.log(filtered);
-
-  //       // MAIOR QUE
-  //       if (
-  //         item.comparison === 'maior que'
-  //         && filtered.includes(planet)
-  //         && planet[columnFilter] < valueFilter
-  //       ) {
-  //         console.log('nao passou');
-  //         filtered.splice(filtered.indexOf(planet), filtered.indexOf(planet));
-  //       }
-
-  //       // MENOR QUE
-  //       if (
-  //         item.comparison === 'menor que'
-  //         && filtered.includes(planet)
-  //         && planet[columnFilter] > valueFilter
-  //       ) {
-  //         console.log('nao passou');
-  //         filtered.splice(filtered.indexOf(planet), filtered.indexOf(planet));
-  //       }
-  //     });
-  //   }
-  //   return filtered;
-  // }, [...planets]);
-
-  // SEGUNDA TENTATIVA USANDO PUSH
-  // Using reduce to filter population
+  // Using reduce to filter Population
   const planetsWithPopulationFilter = planetsWithFilter.reduce((filtered, planet) => {
     const populationNumercValue = planetValueFilter.filterByNumericValues.find(
       (x) => x.column === 'population',

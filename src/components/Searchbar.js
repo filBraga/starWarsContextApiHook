@@ -13,12 +13,22 @@ const Searchbar = () => {
   const [columnValue, setColumnValue] = useState(0);
   const [comparisonValue, setComparisonValue] = useState(0);
   const [valueValue, setValueValue] = useState(0);
+  const [filter, setFilters] = useState(
+    [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ],
+  );
 
   function handleNameChange(event) {
     setPlanetName({ filterByName: { name: event.target.value } });
   }
 
   function handleFilterChange() {
+    // Clicking only in filter to remove unknown planets
     if (columnValue === 0) {
       const planetsWithFilter = planets.reduce((filtered, planet) => {
         if (planet.population !== 'unknown') {
@@ -29,7 +39,7 @@ const Searchbar = () => {
       }, []);
       setPlanets(planetsWithFilter);
     }
-
+    // Add a new filter
     setPlanetValue((prevState) => ({
       // ...prevState,
       filterByNumericValues: [
@@ -41,6 +51,15 @@ const Searchbar = () => {
         },
       ],
     }));
+    // Remove existing filter from options
+    const newFilterList = filter.reduce((filtered, item) => {
+      if (item !== columnValue) {
+        filtered.push(item);
+      }
+      return filtered;
+    }, []);
+    setFilters(newFilterList);
+    // Clearing filters
     setColumnValue('');
     setComparisonValue('');
     setValueValue(0);
@@ -71,11 +90,9 @@ const Searchbar = () => {
           onChange={ (e) => setColumnValue(e.target.value) }
           value={ columnValue }
         >
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {filter.map((item) => (
+            <option key={ item } value={ item }>{item}</option>
+          ))}
         </select>
       </label>
 
@@ -112,7 +129,6 @@ const Searchbar = () => {
         data-testid="button-filter"
       >
         Filter
-
       </button>
 
     </div>
