@@ -59,18 +59,21 @@ const Table = () => {
       (x) => x.column === 'population',
     );
     if (populationNumercValue !== undefined
+      && planet.population !== 'unknown'
       && populationNumercValue.comparison === 'maior que'
       && (planet.population > populationNumercValue.value)) {
       filtered.push(planet);
     }
     if (populationNumercValue !== undefined
+      && planet.population !== 'unknown'
       && populationNumercValue.comparison === 'menor que'
       && planet.population < populationNumercValue.value) {
       filtered.push(planet);
     }
     if (populationNumercValue !== undefined
+      && planet.population !== 'unknown'
       && populationNumercValue.comparison === 'igual a'
-      && planet.population === populationNumercValue.value) {
+      && Number(planet.population) === populationNumercValue.value) {
       filtered.push(planet);
     }
     if (populationNumercValue === undefined) {
@@ -97,7 +100,7 @@ const Table = () => {
       }
       if (diameterNumercValue !== undefined
       && diameterNumercValue.comparison === 'igual a'
-      && planet.diameter === diameterNumercValue.value) {
+      && Number(planet.diameter) === diameterNumercValue.value) {
         filtered.push(planet);
       }
       if (diameterNumercValue === undefined) {
@@ -125,7 +128,7 @@ const Table = () => {
       }
       if (orbitalNumercValue !== undefined
       && orbitalNumercValue.comparison === 'igual a'
-      && planet.orbital_period === orbitalNumercValue.value) {
+      && Number(planet.orbital_period) === orbitalNumercValue.value) {
         filtered.push(planet);
       }
       if (orbitalNumercValue === undefined) {
@@ -153,7 +156,7 @@ const Table = () => {
       }
       if (rotationNumercValue !== undefined
       && rotationNumercValue.comparison === 'igual a'
-      && planet.rotation_period === rotationNumercValue.value) {
+      && Number(planet.rotation_period) === rotationNumercValue.value) {
         filtered.push(planet);
       }
       if (rotationNumercValue === undefined) {
@@ -181,7 +184,7 @@ const Table = () => {
       }
       if (waterNumercValue !== undefined
       && waterNumercValue.comparison === 'igual a'
-      && planet.surface_water === waterNumercValue.value) {
+      && Number(planet.surface_water) === waterNumercValue.value) {
         filtered.push(planet);
       }
       if (waterNumercValue === undefined) {

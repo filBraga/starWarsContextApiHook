@@ -6,6 +6,8 @@ const Searchbar = () => {
     planetName,
     setPlanetName,
     setPlanetValue,
+    planets,
+    setPlanets,
   } = useContext(AppContext);
 
   const [columnValue, setColumnValue] = useState(0);
@@ -17,7 +19,17 @@ const Searchbar = () => {
   }
 
   function handleFilterChange() {
-    console.log(columnValue, comparisonValue, valueValue);
+    if (columnValue === 0) {
+      const planetsWithFilter = planets.reduce((filtered, planet) => {
+        if (planet.population !== 'unknown') {
+          filtered.push(planet);
+        }
+        // console.log(filtered);
+        return filtered;
+      }, []);
+      setPlanets(planetsWithFilter);
+    }
+
     setPlanetValue((prevState) => ({
       // ...prevState,
       filterByNumericValues: [
